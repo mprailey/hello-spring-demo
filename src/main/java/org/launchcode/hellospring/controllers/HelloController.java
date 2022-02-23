@@ -20,10 +20,11 @@ public class HelloController {
      public String goodbye() {
         return "Goodbye, Spring!";
     }
+
     //Handles request of the form /hello?name=LaunchCode
     @RequestMapping(method={RequestMethod.GET,RequestMethod.POST}, value="hello")
-    public String helloWithQueryParam(@RequestParam String name){
-        return "Hello, " + name +"!";
+    public String helloWithQueryParam(@RequestParam String name, @RequestParam String language){
+        return language  + name +"!";
     }
     
     //Handles requests of the form name = /hello/LaunchCode
@@ -34,11 +35,19 @@ public class HelloController {
 }
 
     @GetMapping("form")
-    public String helloForm(){
+    public String createMessage(String name, String language){
         return "<html>" +
                 "<body>" +
                 "<form action='hello' method='post'>" +
-                "<input type='text' name='name'>" +
+                "<label> Name <input type='text' name='name'/></label>" +
+                "<label> Language <select name='language'>" +
+                   "<option value='Hello, '>English </option>" +
+                    "<option value='Bonjour, '>French</option>" +
+                    "<option value='Hola, '>Spanish</option>" +
+                    "<option value='Ciao, '>Italian</option>" +
+                    "<option value= 'Habari, '>Swahili</option>" +
+                    "</select>" +
+                "</label>" +
                 "<input type='submit' value='Greet me!'>" +
                 "</form>" +
                 "</body>" +
